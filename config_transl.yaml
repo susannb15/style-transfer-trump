@@ -1,0 +1,56 @@
+## Examples will be written here
+save_data: data/run/example
+
+## Vocabs
+src_vocab: data/vocab.en
+tgt_vocab: data/vocab.fr
+
+## Corpus opts
+data:
+    corpus_1:
+        path_src: data/europarl-train.en
+        path_tgt: data/europarl-train.fr
+    valid:
+        path_src: data/europarl-dev.en
+        path_tgt: data/europarl-dev.fr
+
+# Pruning
+src_seq_length_trunc: 50
+tgt_seq_length_trunc: 50
+
+## Train opts
+# GPU
+world_size: 4
+gpu_ranks:
+- 0
+- 1
+- 2
+- 3
+
+# specifications
+save_model: models/en-fr/en-fr
+save_checkpoint_steps: 100 #5000
+keep_checkpoint: 10
+seed: 42
+train_steps: 200000  
+valid_steps: 100 #5000  
+
+decoder_type: rnn
+encoder_type: brnn
+word_vec_size: 300
+rnn_size: 500
+layers: 2
+optim: adagrad
+learning_rate: 0.15
+adagrad_accumulator_init: 0.1
+max_grad_norm: 2
+
+batch_size: 4
+max_generator_batches: 4
+dropout: 0.3
+
+copy_attn: 'false'
+global_attention: mlp
+
+## training from checkpoint
+#train_from: models/en-fr_step_13000.pt

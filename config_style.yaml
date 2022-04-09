@@ -1,0 +1,51 @@
+## Examples will be written here
+save_data: data/run/example
+
+## Vocabs
+src_vocab: data/vocab.fr
+tgt_vocab: data/vocab.en
+
+## Corpus opts
+data:
+    corpus_1:
+        path_src: data/trump-train.fr
+        path_tgt: data/trump-train.csv
+    valid:
+        path_src: data/trump-dev.fr
+        path_tgt: data/trump-dev.csv
+
+## Train opts
+# GPU
+world_size: 1
+gpu_ranks:
+- 0
+#- 1
+#- 2
+#- 3
+
+# specifications
+save_model: models/trump_generator/trump_generator
+save_checkpoint_steps: 100 #2000 
+keep_checkpoint: 10
+seed: 42
+train_steps: 30000  
+valid_steps: 100 #2000  
+
+encoder: models/fr-en/fr-en.pt
+classifier: models/classifier/classifier.pt
+classifier_targets: 1 # the label of the desired style (1=Trump)
+word_vec_size: 300
+rnn_size: 500
+layers: 2
+optim: adagrad
+learning_rate: 0.15
+adagrad_accumulator_init: 0.1
+max_grad_norm: 2
+
+batch_size: 4
+max_generator_batches: 4
+dropout: 0.3
+
+copy_attn: 'false'
+global_attention: mlp
+

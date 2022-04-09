@@ -25,9 +25,11 @@ https://www.kaggle.com/kingburrito666/better-donald-trump-tweets
 ### Translation models
 
 Train the translation model (en-fr):
+
 python train_nmt.py -config config_transl.yaml
 
 and the "backtranslation" model (fr-en):
+
 python train_nmt.py -config config_backtransl.yaml
 
 The config files contain all information that the trainer needs. You can modify the config files if you want to use 
@@ -48,7 +50,8 @@ onmt_translate -model models/en-fr/en-fr.pt -src data/biden-test.csv -output dat
 ### Style Decoder Training
 
 The style decoder is trained by running:
-python train_nmt.py -config config_style.yaml
+
+python train_style_decoder.py -config config_style.yaml
 
 The config file must specify a model (the backtranslation model) - this will be the encoder for the style transfer model. 
 

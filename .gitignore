@@ -1,2 +1,4 @@
 # ignore models
 models/
+onmt_style/__pycache__
+__pycache__/

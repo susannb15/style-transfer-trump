@@ -16,12 +16,12 @@ data:
 
 ## Train opts
 # GPU
-world_size: 1
+world_size: 4
 gpu_ranks:
 - 0
-#- 1
-#- 2
-#- 3
+- 1
+- 2
+- 3
 
 # specifications
 save_model: models/trump_generator/trump_generator

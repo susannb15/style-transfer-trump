@@ -1,9 +1,9 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-trump = pd.read_csv("../data/OLD_DATA/trump.csv")
+trump = pd.read_csv("data/trump.csv")
 trump.rename(columns={"Tweet_Text": "text"}, inplace=True)
-biden = pd.read_csv("../data/OLD_DATA/biden.csv")
+biden = pd.read_csv("data/biden.csv")
 biden.rename(columns={"tweet": "text"}, inplace=True)
 
 pattern = "(www|http:|https:)+[^\s]+[\w]"

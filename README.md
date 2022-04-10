@@ -3,10 +3,14 @@ Project for the seminar "Controllable Neural Text Generation" (WS21/22)
 
 ##  SETUP AND REQUIREMENTS
 
-This code runs on Python 3.6 and torch 1.10.
-If you use conda you can create the needed environment like this:
+This code runs on Python 3.6 and torch 1.10. You can install all dependencies needed to run the code with this:
+
+pip install -r requirements.txt
+
+or via conda:
 
 conda env create --file style_transfer.yml
+
 conda activate style_transfer
 
 ## DATA
@@ -58,3 +62,11 @@ The config file must specify a model (the backtranslation model) - this will be 
 ### Transfer the style of Trump's tweets to Biden's tweets
 
 onmt_translate -model models/trump_generator/trump_generator.pt -src data/biden-test.fr -output data/biden-test.trump -gpu 0
+
+## REFERENCES
+
+Klein, G., Kim, Y., Deng, Y., Senellart, J., & Rush, A. M. (2017, July). OpenNMT: Open-Source Toolkit for Neural Machine Translation. In Proceedings of ACL 2017, System Demonstrations (pp. 67-72).
+
+Koehn, Philipp. "Europarl: A parallel corpus for statistical machine translation." Proceedings of machine translation summit x: papers. 2005.
+
+Prabhumoye, S., Tsvetkov, Y., Salakhutdinov, R., & Black, A. W. (2018, July). Style Transfer Through Back-Translation. In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) (pp. 866-876).

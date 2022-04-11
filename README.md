@@ -1,7 +1,7 @@
 # style-transfer-trump
 Project for the seminar "Controllable Neural Text Generation" (WS21/22)
 
-This is an implementation of the paper: Style Transfer Through Back-Translation. Shrimai Prabhumoye, Yulia Tsvetkov, Ruslan Salakhutdinov, Alan W Black.
+This is an implementation of the paper: Style Transfer Through Back-Translation. Shrimai Prabhumoye, Yulia Tsvetkov, Ruslan Salakhutdinov, Alan W Black. https://github.com/shrimai/Style-Transfer-Through-Back-Translation
 
 The goal is to train a translation system that "trumpifies" Biden's tweets through back-translation. 
 
@@ -22,7 +22,7 @@ conda activate style_transfer
 
 ## Data
 
-The method requires parallel data to train a translation system and two datasets of different styles, as well as a classifier that is pre-trained to distinguish between those styles. 
+The method requires parallel data to train a translation system and two datasets of different styles, as well as a classifier that is pre-trained to distinguish between those styles (the classifier in this project was trained by using code of https://github.com/shrimai/Style-Transfer-Through-Back-Translation). 
 
 This project uses the Europarl corpus for neural machine translation training. It has been reduced to 15k training and 5k validation sentences to make it easier to test the code. You can find the full Europarl corpus here: https://www.statmt.org/europarl/
 

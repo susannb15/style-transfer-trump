@@ -4,7 +4,6 @@ certifi==2021.5.30
 charset-normalizer==2.0.12
 click==8.0.4
 ConfigArgParse==1.5.3
-dataclasses @ file:///tmp/build/80754af9/dataclasses_1614363715916/work
 Flask==2.0.3
 google-auth==2.6.3
 google-auth-oauthlib==0.4.6
@@ -17,10 +16,6 @@ Jinja2==3.0.3
 joblib==1.1.0
 Markdown==3.3.6
 MarkupSafe==2.0.1
-mkl-fft==1.3.0
-mkl-random==1.1.1
-mkl-service==2.3.0
-numpy @ file:///tmp/build/80754af9/numpy_and_numpy_base_1603487797006/work
 oauthlib==3.2.0
 OpenNMT-py==2.2.0
 pandas==1.1.5
@@ -28,7 +23,6 @@ protobuf==3.19.4
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pyonmttok==1.31.0
-python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
 pytz==2021.3
 PyYAML==6.0
 requests==2.27.1
@@ -37,7 +31,6 @@ rsa==4.8
 scikit-learn==0.24.2
 scipy==1.5.4
 sentencepiece==0.1.96
-six @ file:///tmp/build/80754af9/six_1644875935023/work
 tensorboard==2.8.0
 tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.8.1
@@ -45,7 +38,6 @@ threadpoolctl==3.1.0
 torch==1.10.2
 torchtext==0.5.0
 tqdm==4.64.0
-typing_extensions @ file:///opt/conda/conda-bld/typing_extensions_1647553014482/work
 urllib3==1.26.9
 waitress==2.0.0
 Werkzeug==2.0.3

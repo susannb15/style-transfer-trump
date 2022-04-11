@@ -25,14 +25,14 @@ gpu_ranks:
 
 # specifications
 save_model: models/trump_generator/trump_generator
-save_checkpoint_steps: 100 #2000 
+save_checkpoint_steps: 2000 
 keep_checkpoint: 10
 seed: 42
-train_steps: 30000  
-valid_steps: 100 #2000  
+train_steps: 12000  
+valid_steps: 2000  
 
-encoder: models/fr-en/fr-en.pt
-classifier: models/classifier/classifier.pt
+encoder: models/fr-en/fr-en.pt # path to the back-translation model
+classifier: models/classifier/classifier.pt # path to the pre-trained style classifier
 classifier_targets: 1 # the label of the desired style (1=Trump)
 word_vec_size: 300
 rnn_size: 500

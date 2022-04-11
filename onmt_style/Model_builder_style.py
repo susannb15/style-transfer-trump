@@ -17,9 +17,7 @@ from onmt.modules import Embeddings, CopyGenerator
 from onmt.modules.util_class import Cast
 from onmt.utils.misc import use_gpu
 from onmt.utils.logging import logger
-#from Parse_style import ArgumentParser
 from onmt.constants import ModelTask
-#from Models_style import Decoder, StyleDecoder, ConvNet
 
 
 def build_embeddings(opt, text_field, for_encoder=True):
@@ -77,7 +75,7 @@ def build_decoder(opt, embeddings):
     """
     dec_type = "ifrnn" if opt.decoder_type == "rnn" and opt.input_feed \
                else opt.decoder_type
-    return onmt_style.Decoder(opt, embeddings)
+    return onmt_style.Decoder(opt, embeddings) # load the style decoder!
 
 
 def load_test_model(opt, model_path=None):

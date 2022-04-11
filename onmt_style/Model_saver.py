@@ -6,6 +6,9 @@ from onmt.utils.logging import logger
 
 from copy import deepcopy
 
+"""
+The model saver saves encoder and decoder separately.
+"""
 
 def build_model_saver(model_opt, opt, model, fields, optim):
     # _check_save_model_path

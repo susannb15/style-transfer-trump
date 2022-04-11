@@ -1,6 +1,10 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
+"""
+Prepares and splits the raw tweet data.
+"""
+
 trump = pd.read_csv("data/trump.csv")
 trump.rename(columns={"Tweet_Text": "text"}, inplace=True)
 biden = pd.read_csv("data/biden.csv")

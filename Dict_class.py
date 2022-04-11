@@ -1,6 +1,10 @@
 import torch
 import codecs
 
+"""
+This is only here because torch.load can not load my classifier without it :)
+"""
+
 class Dict(object):
     def __init__(self, data=None, lower=False, seq_len=50):
         self.idxToLabel = {}

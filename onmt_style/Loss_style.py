@@ -22,25 +22,6 @@ def build_loss_compute(model, tgt_field, opt, train=True):
     padding_idx = tgt_field.vocab.stoi[tgt_field.pad_token]
     unk_idx = tgt_field.vocab.stoi[tgt_field.unk_token]
     
-    """
-    if opt.lambda_coverage != 0:
-        assert opt.coverage_attn, "--coverage_attn needs to be set in " \
-            "order to use --lambda_coverage != 0"
-
-    if opt.copy_attn:
-        criterion = onmt.modules.CopyGeneratorLoss(
-            len(tgt_field.vocab), opt.copy_attn_force,
-            unk_index=unk_idx, ignore_index=padding_idx
-        )
-    elif opt.label_smoothing > 0 and train:
-        criterion = LabelSmoothingLoss(
-            opt.label_smoothing, len(tgt_field.vocab), ignore_index=padding_idx
-        )
-    elif isinstance(model.generator[-1], LogSparsemax):
-        criterion = SparsemaxLoss(ignore_index=padding_idx, reduction='sum')
-    else:
-        criterion = nn.NLLLoss(ignore_index=padding_idx, reduction='sum')
-    """
     criterion = nn.NLLLoss(ignore_index=padding_idx, reduction='sum')
     # if the loss function operates on vectors of raw logits instead of
     # probabilities, only the first part of the generator needs to be
@@ -48,47 +29,6 @@ def build_loss_compute(model, tgt_field, opt, train=True):
     # loss function of this kind is the sparsemax loss.
     use_raw_logits = isinstance(criterion, SparsemaxLoss)
     loss_gen = model.generator[0] if use_raw_logits else model.generator
-    """
-    if opt.copy_attn:
-        if opt.model_task == ModelTask.SEQ2SEQ:
-            compute = onmt.modules.CopyGeneratorLossCompute(
-                criterion, loss_gen, tgt_field.vocab,
-                opt.copy_loss_by_seqlength,
-                lambda_coverage=opt.lambda_coverage
-            )
-        elif opt.model_task == ModelTask.LANGUAGE_MODEL:
-            compute = onmt.modules.CopyGeneratorLMLossCompute(
-                criterion, loss_gen, tgt_field.vocab,
-                opt.copy_loss_by_seqlength,
-                lambda_coverage=opt.lambda_coverage
-            )
-        else:
-            raise ValueError(
-                f"No copy generator loss defined for task {opt.model_task}"
-            )
-    else:
-        if opt.model_task == ModelTask.SEQ2SEQ:
-            compute = NMTLossCompute(
-                criterion,
-                loss_gen,
-                lambda_coverage=opt.lambda_coverage,
-                lambda_align=opt.lambda_align,
-            )
-        elif opt.model_task == ModelTask.LANGUAGE_MODEL:
-            assert (
-                opt.lambda_align == 0.0
-            ), "lamdba_align not supported in LM loss"
-            compute = LMLossCompute(
-                criterion,
-                loss_gen,
-                lambda_coverage=opt.lambda_coverage,
-                lambda_align=opt.lambda_align,
-            )
-        else:
-            raise ValueError(
-                f"No compute loss defined for task {opt.model_task}"
-            )
-    """
     compute = StyleLossCompute(
                 criterion,
                 loss_gen,
@@ -363,6 +303,7 @@ class CommonLossCompute(LossComputeBase):
 class StyleLossCompute(LossComputeBase):
     """
     Loss computation for the style decoder: joint loss of the NMT model (NLLLoss) and the style classifier (BCELoss)
+    The loss of the style classifier is not included here but is added to the NLLLoss in the training loop!
     """
     def __init__(self, criterion, generator, normalization="sents",
                  lambda_coverage=0.0, lambda_align=0.0, tgt_shift_index=1):
@@ -370,7 +311,6 @@ class StyleLossCompute(LossComputeBase):
         self.lambda_coverage = lambda_coverage
         self.lambda_align = lambda_align
         self.tgt_shift_index = tgt_shift_index
-        print("StyleLossCompute is used!")
 
     def _add_coverage_shard_state(self, shard_state, attns):
         coverage = attns.get("coverage", None)

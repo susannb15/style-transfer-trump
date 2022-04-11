@@ -3,7 +3,6 @@ import os
 import torch
 
 import onmt_style
-#import Opts_style as opts
 from onmt.utils.logging import logger
 from onmt.constants import CorpusName, ModelTask
 from onmt.transforms import AVAILABLE_TRANSFORMS

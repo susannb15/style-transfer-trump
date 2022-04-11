@@ -3,11 +3,8 @@ import torch
 
 import onmt_style
 from onmt.inputters.inputter import IterOnDevice
-#from Model_builder_style import build_model
 from onmt.utils.optimizers import Optimizer
 from onmt.utils.misc import set_random_seed
-#from Trainer_style import build_trainer
-#from Model_saver import build_model_saver
 from onmt.utils.logging import init_logger, logger
 from onmt.utils.parse import ArgumentParser
 import torch.nn as nn

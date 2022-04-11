@@ -25,11 +25,11 @@ gpu_ranks:
 
 # specifications
 save_model: models/fr-en/fr-en
-save_checkpoint_steps: 100 #1000
+save_checkpoint_steps: 1000
 keep_checkpoint: 10
 seed: 42
 train_steps: 100000 
-valid_steps: 100 #1000
+valid_steps: 1000
 
 decoder_type: rnn
 encoder_type: rnn

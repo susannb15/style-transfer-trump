@@ -8,8 +8,6 @@ from onmt.modules.embeddings import prepare_pretrained_embeddings
 from onmt.utils.logging import init_logger, logger
 
 import onmt_style
-#from Model_saver import load_checkpoint
-#from Train_single import main as single_main, _build_train_iter
 
 from onmt.utils.parse import ArgumentParser
 from onmt.opts import train_opts

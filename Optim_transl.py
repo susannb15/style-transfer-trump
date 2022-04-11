@@ -3,6 +3,10 @@ import torch.optim as optim
 import torch.nn as nn
 from torch.nn.utils import clip_grad_norm
 
+"""
+This is only here because torch.load can not load my classifier without it :)
+"""
+
 class Optim(object):
 
     def set_parameters(self, params):

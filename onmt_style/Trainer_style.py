@@ -3,7 +3,6 @@ import traceback
 
 import onmt_style
 import onmt.utils
-#from Loss_style import *
 from onmt.utils.logging import logger
 import torch.nn as nn
 
@@ -310,7 +309,7 @@ class Trainer(object):
                     # Compute loss.
                     linear = self.model.class_input(outputs)
                     softmax = nn.Softmax().cuda()
-                    curr_zeros = torch.cuda.FloatTensor(50 - linear.size(0), linear.size(1), linear.size(2)).zero_()
+                    curr_zeros = torch.cuda.FloatTensor(50 - linear.size(0), linear.size(1), linear.size(2)).zero_() # seq length for the classifier is 50
                     class_tgt = torch.cuda.FloatTensor(linear.size(1)).fill_(self.classifier_targets)
                     class_tgt = class_tgt.unsqueeze(1)
                     linear_mod = linear.view(-1, linear.size(2))
@@ -323,7 +322,6 @@ class Trainer(object):
                     classifier_outputs = self.model.classifier(soft_cat)
                     crit = nn.BCELoss()
                     classifier_loss = crit(classifier_outputs, class_tgt)
-                    #print("CLASSIFIER LOSS", classifier_loss)
 
                     loss, batch_stats = self.valid_loss(batch, outputs, attns)
                   
@@ -389,10 +387,10 @@ class Trainer(object):
                         soft_cat = torch.cat((soft_out, curr_zeros), 0)
                     else:
                         soft_cat = soft_out[:50]
-                    classifier_outputs = self.model.classifier(soft_cat)
-                    crit = nn.BCELoss()
-                    classifier_loss = crit(classifier_outputs, class_tgt)
-                    #print("CLASSIFIER LOSS", classifier_loss)
+                    with torch.no_grad():
+                        classifier_outputs = self.model.classifier(soft_cat)
+                        crit = nn.BCELoss()
+                        classifier_loss = crit(classifier_outputs, class_tgt)
 
                     loss, batch_stats = self.train_loss(
                         batch,
@@ -406,7 +404,7 @@ class Trainer(object):
 
                 try:
                     if loss is not None:
-                        loss += classifier_loss # move out of this maybe
+                        loss += classifier_loss 
                         self.optim.backward(loss)
 
 
